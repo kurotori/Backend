@@ -23,6 +23,9 @@ class NotaController extends Controller
         );
     }
 
+    /**
+     * Permite registrar una nueva nota en el sistema
+     */
     public function nueva(Request $solicitud)
     {
         $validacion = $solicitud->validate(
