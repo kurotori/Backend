@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\NotaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,17 @@ Route::get(
     [NotaController::class, 'verTodas']
 );
 
+Route::get(
+    '/usuarios',
+    [RegisteredUserController::class, 'verTodos']
+);
+
 Route::post(
     '/nota/nueva',
     [NotaController::class, 'nueva']
+);
+
+Route::post(
+    '/usuario/nuevo',
+    [RegisteredUserController::class, 'store']
 );
