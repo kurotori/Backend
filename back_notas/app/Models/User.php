@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject; //Agregado para JWT
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject // el *implements JWTSubject* se agrega para JWT
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens; //Se agrega HasApiTokens al instalar api
+    use HasFactory, Notifiable, HasApiTokens; //Se debe agregar HasApiTokens al instalar api
 
     /**
      * The attributes that are mass assignable.
@@ -45,5 +46,27 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    /**
+     *  - ------Agregado para JWT------ -
+     */
+
+
+    /**
+     * Get the identifier that will be stored in the JWT token.
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return an array with custom claims to be added to the JWT token.
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
