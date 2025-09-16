@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -68,5 +69,15 @@ class User extends Authenticatable implements JWTSubject // el *implements JWTSu
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    // --- Agregado para manejar las notas del usuario
+
+    /**
+     * Permite obtener las notas del usuario
+     */
+    public function notas(): HasMany
+    {
+        return $this->hasMany(Nota::class);
     }
 }

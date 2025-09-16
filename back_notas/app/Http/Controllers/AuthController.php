@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -50,7 +51,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Permite iniciar sesión en el sistema
+     * Permite iniciar sesión en el sistema utilizando JWTs
      */
     public function login(Request $solicitud)
     {
@@ -64,11 +65,15 @@ class AuthController extends Controller
             return response()->json(['error' => 'No se pudo crear un token'], 500);
         }
 
+        //Establecer la cookie con el token en el cliente
+        //$cookie = Cookie::make('token_jwt', $token, 60);
+        //$response->withCookie(cookie('key', $value));
+
         return response()->json([
-            'token' => $token,
+            'estado' => "OK",
             'destino' => 'notas'
             //'expires_in' => auth('api')-> factory()->getTTL() * 60,
-        ]);
+        ])->withCookie(cookie('token_jwt', $token, 60));
     }
 
     /**

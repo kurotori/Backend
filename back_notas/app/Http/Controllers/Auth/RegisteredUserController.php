@@ -57,4 +57,9 @@ class RegisteredUserController extends Controller
     {
         return User::all();
     }
+
+    // - - - - Agregado para manejo de notas del usuario
+    //public function
+
+    // - - - - - - - - -
 }

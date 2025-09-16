@@ -17,7 +17,7 @@ class JwtMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        //Agregado para gestión de JWT
+        // -- Agregado para gestión de JWT
         try {
             JWTAuth::parseToken()->authenticate();
         } catch (Exception $e) {
