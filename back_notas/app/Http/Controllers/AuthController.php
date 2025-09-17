@@ -71,7 +71,7 @@ class AuthController extends Controller
 
         return response()->json([
             'estado' => "OK",
-            'destino' => 'notas'
+            'destino' => 'notas',
             //'expires_in' => auth('api')-> factory()->getTTL() * 60,
         ])->withCookie(cookie('token_jwt', $token, 60));
     }

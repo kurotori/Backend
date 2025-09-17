@@ -23,3 +23,8 @@ Route::get(
     '/bichos',
     [BichoController::class, 'verTodos']
 );
+
+Route::post(
+    '/bicho/nuevo',
+    [BichoController::class, 'nuevo']
+);

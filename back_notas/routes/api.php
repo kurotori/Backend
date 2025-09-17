@@ -3,24 +3,19 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotaController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
-
-Route::get(
-    '/cookie',
-    function (Request $solicitud) {
-        print($cookie = $solicitud->cookie('token_jwt'));
-    }
-);
 
 
 Route::get(
@@ -49,7 +44,16 @@ Route::post(
 
 Route::post(
     'ingresar',
-    [AuthController::class, 'login']
+    [LoginController::class, 'autenticar']
+    //[AuthController::class, 'login']
+);
+
+Route::get(
+    '/cookie',
+    function (Request $solicitud) {
+        $usuario = $solicitud->cookie('token_jwt');
+        return response()->json($usuario, 200);
+    }
 );
 
 //Grupo Agregado para manejo con JWT
