@@ -13,6 +13,7 @@ class BichoController extends Controller
     public function verTodos()
     {
         $bichos = Bicho::all();
+
         return response()->json(
             [
                 'estado' => 'OK',
