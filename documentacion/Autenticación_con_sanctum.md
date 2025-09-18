@@ -6,6 +6,9 @@ La autenticación con Laravel se logra mediante **tokens** que son expedidos por
 2. Agregar **HasApiTokens** al modelo de usuario (***/app/Http/Models/User.php***)
 
 3. Hace falta configurar adecuadamente la instancia de Axios en el frontend para que solicite la cookie CSRF
+4. Configurar en config/session.php:
+    'secure', agregar parámetro true
+    
 
 
 // - - - Atención: Información en Revisión, no considerar - - -
