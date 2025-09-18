@@ -9,6 +9,7 @@
      *Nota:*No es realmente necesaria la ejecución del comando `npm install` al finalizar
 3. **Configurar el proyecto como Backend**:
    - Agregar librerías y acceso al archivos de rutas de API con el comando `php artisan install:api`
+   - Exponer el archivo `config\cors.php`mediante el comando `php artisan config:publish cors`
 4. **Añadir** el atributo `HasApiTokens` al modelo de usuario ([ver archivo](../app/Models/User.php))
 5. **Definir** las estructuras de la base de datos mediante migraciones, y crear los modelos correspondientes. Por conveniencia, se recomienda crear los modelos e indicar, _en el mismo comando_, que se creen las migraciones correspondientes.
    Por ejemplo, para un modelo llamado `Cosa`, el comando sería: `php artisan make:model Cosa -m`
