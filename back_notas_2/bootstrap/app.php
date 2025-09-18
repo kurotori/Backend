@@ -17,6 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
+        //BACKEND: Agregado para conectarse correctamente a frontend
+        $middleware->statefulApi();
+
         $middleware->web(append: [
             HandleAppearance::class,
             HandleInertiaRequests::class,
