@@ -21,19 +21,22 @@ class LoginController extends Controller
 
         if (Auth::attempt($credenciales)) {
             $solicitud->session()->start();
-            $usuario = Auth::user();
-            Auth::login($usuario);
-            $sesion = Auth::getSession();
+            $solicitud->session()->regenerate();
+            $usuario = $solicitud->user();
+
+            //Auth::login($usuario);
+            //$sesion = $solicitud->sessi;//Auth::getSession();
 
             return response()->json(
                 [
                     'estado' => 'OK',
                     'mensaje' => 'log in exitoso',
                     'usuario' => $usuario,
-                    'sesion' => $sesion
+                    //'sesion' => $sesion->getID()
                 ],
                 200
             )->withCookie(cookie('token_jwt', '---', 60));
+        } else {
         }
     }
 }

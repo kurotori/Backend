@@ -15,7 +15,7 @@ class User extends Authenticatable
     use HasFactory,
         Notifiable,
         TwoFactorAuthenticatable,
-        HasApiTokens; //NOTA: Agregado por compatibilidad con tokens de Sanctum
+        HasApiTokens; //BACKEND: Agregado para compatibilidad con tokens de Sanctum
 
     /**
      * The attributes that are mass assignable.

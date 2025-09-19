@@ -2,14 +2,28 @@
 
 La autenticación con Laravel se logra mediante **tokens** que son expedidos por la API
 
-1. Asegurarse de que el archivo **config/sanctum.php** contiene el tributo **stateful**, y que este incluye **_de forma explícita_** el dominio del frontend.
-2. Agregar **HasApiTokens** al modelo de usuario (**_/app/Http/Models/User.php_**)
+1. **Asegurarse** de que el archivo `config/sanctum.php`:
+   - Contiene el atributo `stateful`, y que este incluye **_de forma explícita_** el dominio del frontend (usar). ([ver en archivo](../back_notas_2/config/sanctum.php))
+    En general, si estamos trabajando con _Vue_, el atributo `stateful` será semejante a lo siguiente:
 
-3. Hace falta configurar adecuadamente la instancia de Axios en el frontend para que solicite la cookie CSRF
+    ~~~php
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
+        '%s%s',
+        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,127.0.0.1:5173,localhost:5173::1',
+        Sanctum::currentApplicationUrlWithPort(),
+    ))),
+    ~~~
+
+    - Contiene el el atributo `support_credentials`, y que su valor es `true`
+
+2. Agregar el atributo **HasApiTokens** al modelo de usuario (**_/app/Http/Models/User.php_**) ([ver en el archivo](../back_notas_2/app/Models/User.php)) para facilitar el uso de tokens de `sanctum` con el mismo.
+
+3. **IMPORTANTE:** Hace falta **configurar adecuadamente** la instancia de **Axios** en el frontend para que solicite la cookie CSRF
+
 4. **Configurar:**
 
    - En el archivo `bootstrap/app.php`, el middleware `statefulApi` ([ver en el archivo](../back_notas_2/bootstrap/app.php))
-   - En el archivo `config/cors.php`, cambiar el valor de la propiedad `support_credentials` a `true`
+   
 
 5. Configurar en config/session.php:
    'secure', agregar parámetro true

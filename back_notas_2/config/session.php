@@ -181,7 +181,7 @@ return [
     | the HTTP protocol. It's unlikely you should disable this option.
     |
     */
-
+    //BACKEND: Asegurarse que el valor de esta propiedad esté establecido en 'true'
     'http_only' => env('SESSION_HTTP_ONLY', true),
 
     /*
@@ -212,6 +212,7 @@ return [
     |
     */
 
+    //BACKEND: Asegurarse que el valor de esta propiedad esté establecido en 'true'
     'partitioned' => env('SESSION_PARTITIONED_COOKIE', true),
 
 ];

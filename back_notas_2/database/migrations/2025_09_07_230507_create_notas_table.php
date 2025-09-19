@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('titulo', 50);
             $table->string('texto', 250);
 
-            // - - - Agregado para vincular esta tabla al usuario
+            // - - - BACKEND: Agregado para vincular esta tabla a la tabla de usuarios
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             // - - - - - - - - - //

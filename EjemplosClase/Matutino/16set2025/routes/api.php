@@ -28,3 +28,13 @@ Route::post(
     '/bicho/nuevo',
     [BichoController::class, 'nuevo']
 );
+
+Route::post(
+    'ingresar',
+    function () {
+        return response()->json([
+            'estado' => 'OK',
+            'mensaje' => 'Si podés leer esto, estas muy cerca'
+        ], 200);
+    }
+);
