@@ -9,7 +9,9 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
-    //
+    /**
+     * Permite autenticar a un usuario
+     */
     public function autenticar(Request $solicitud)
     {
         $credenciales = $solicitud->validate([
