@@ -169,6 +169,7 @@ return [
     |
     */
 
+    //BACKEND:  Asegurarse de que el valor de esta propiedad esté establecido en 'true'
     'secure' => env('SESSION_SECURE_COOKIE', true),
 
     /*
@@ -181,7 +182,7 @@ return [
     | the HTTP protocol. It's unlikely you should disable this option.
     |
     */
-    //BACKEND: Asegurarse que el valor de esta propiedad esté establecido en 'true'
+    //BACKEND: Asegurarse de que el valor de esta propiedad esté establecido en 'true'
     'http_only' => env('SESSION_HTTP_ONLY', true),
 
     /*
@@ -199,6 +200,7 @@ return [
     |
     */
 
+    //BACKEND: Asegurarse de que el valor de esta propiedad esté establecido en 'lax'
     'same_site' => 'lax', //env('SESSION_SAME_SITE', 'none'),
 
     /*

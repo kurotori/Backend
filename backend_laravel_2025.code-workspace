@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "documentacion"
+		},
+		{
+			"path": "../Frontend/EjemplosBase/notas-base"
 		}
 	],
 	"settings": {}

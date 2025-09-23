@@ -9,10 +9,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+
+
 Route::post(
     '/usuario/nuevo',
     [RegisteredUserController::class, 'store']
-);
+)->middleware('web');
 
 Route::middleware('web')->post(
     'ingresar',
