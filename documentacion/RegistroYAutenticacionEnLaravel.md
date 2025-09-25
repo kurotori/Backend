@@ -21,10 +21,11 @@ En este controlador encontraremos la función `store`, que usaremos para registr
          //return to_route('dashboard');
     ~~~
 
+3. Finalmente, le agregaremos a la función un retorno con un objeto `response` que le indique al frontend el resultado de la operación y que, en caso de éxito, se redirija hacia la página de inicio de sesión mediante una variable adecuada.
+
 ### B - Configuración de la Ruta
 
-En el archivo `routes/api.php` ([ver en el archivo][l4]) declararemos una ruta de tipo `post`  
-
+En el archivo `routes/api.php` ([ver en el archivo][l4]) declararemos una ruta de tipo `post` para recibir los datos de registro de usuarios, y la vinculamos al controlador  
 
 [l1]:README.md
 [l2]:../back_notas_2/app/Http/Controllers/Auth/

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,17 +36,26 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = User::create(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]
+        );
 
         event(new Registered($user));
 
-        Auth::login($user);
+        //Auth::login($user);
 
+        return response()->json(
+            [
+                'estado' => 'OK',
+                'mensaje' => 'Usuario registrado con éxito',
+                'destino' => 'inicioSesion'
+            ],
+            200
+        );
         //BACKEND: Se comenta para evitar un error por redireccionamiento
         //return to_route('dashboard');
     }

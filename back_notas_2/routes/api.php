@@ -10,12 +10,17 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-
+/**
+ * Permite recibir la solicitud para registrar un usuario nuevo en el sistema
+ */
 Route::post(
     '/usuario/nuevo',
     [RegisteredUserController::class, 'store']
 )->middleware('web');
 
+/**
+ * Permite recibir y responder a la solicitud de inicio de sesión
+ */
 Route::middleware('web')->post(
     'ingresar',
     [LoginController::class, 'autenticar']
