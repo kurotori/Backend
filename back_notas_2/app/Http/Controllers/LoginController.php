@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
@@ -14,6 +12,7 @@ class LoginController extends Controller
      */
     public function autenticar(Request $solicitud)
     {
+
         $credenciales = $solicitud->validate([
 
             'email' => ['required', 'email'],
@@ -37,8 +36,16 @@ class LoginController extends Controller
                     //'sesion' => $sesion->getID()
                 ],
                 200
-            )->withCookie(cookie('token_jwt', '---', 60));
+            );
         } else {
+            return response()->json(
+                [
+                    'estado' => 'ERROR',
+                    'mensaje' => 'Error en el nombre de usuario o la contraseña',
+                    //'sesion' => $sesion->getID()
+                ],
+                403
+            );
         }
     }
 }

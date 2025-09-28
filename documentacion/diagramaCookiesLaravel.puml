@@ -1,0 +1,20 @@
+@startuml DiagramaCookiesLaravel
+    <style>
+root {
+  FontColor #?black:white
+}
+</style>
+    title Manejo de Cookies en Laravel
+    participant Frontend #RoyalBlue
+    participant Backend #Red
+
+    Frontend -[#RoyalBlue]> Backend: **1 -** Conexión y solicitud inicial
+    Backend -[#Red]> Backend: **2 -** Se **registra la conexión** y\nse le asignan sus **tokens**
+    Backend -[#Red]> Frontend: **3 -** Se envían las //cookies// con los **tokens**: \n**XSRF-TOKEN** y **laravel_session**
+    Frontend <[#RoyalBlue]- Frontend: **4 -** Se almacenan las\n//cookies// recibidas
+    Frontend -[#RoyalBlue]> Backend: **5 -** Nueva solicitud, incluyendo las //cookies//\n **XSRF-TOKEN** y **laravel_session**
+    Backend -[#Red]> Backend: **6 -** Se verifican los **tokens**\nrecibidos en la solicitud y\nse **renuevan los tokens **
+    Backend -[#Red]> Frontend: **7 -** Se envian //cookies// con los \n**tokens renovados**, y\n(//Si se verifican los **tokens**//)\n\tSe envian los **datos solicitados**\n(//Si **no** se verifican los **tokens**//)\n\tSe envía un **error 419**
+    Frontend <[#RoyalBlue]- Frontend: **8 -** Se almacenan las\n//cookies// recibidas
+
+@enduml

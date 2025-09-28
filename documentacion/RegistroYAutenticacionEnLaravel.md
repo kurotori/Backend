@@ -11,23 +11,47 @@ En este controlador encontraremos la función `store`, que usaremos para registr
 
 1. En la declaración de la función `store`, comentamos el tipo de datos de retorno `RedirectResponse`:
 
-    ~~~php
-        public function store(Request $request) //:RedirectResponse
-    ~~~
+   ```php
+       public function store(Request $request) //:RedirectResponse
+   ```
 
 2. En el cuerpo de la función `store`, comentamos el `return to_route` que se encuentra al final:
 
-    ~~~php
-         //return to_route('dashboard');
-    ~~~
+   ```php
+        //return to_route('dashboard');
+   ```
 
 3. Finalmente, le agregaremos a la función un retorno con un objeto `response` que le indique al frontend el resultado de la operación y que, en caso de éxito, se redirija hacia la página de inicio de sesión mediante una variable adecuada.
 
 ### B - Configuración de la Ruta
 
-En el archivo `routes/api.php` ([ver en el archivo][l4]) declararemos una ruta de tipo `post` para recibir los datos de registro de usuarios, y la vinculamos al controlador  
+En el archivo `routes/api.php` ([ver en el archivo][l4]) declararemos una ruta de tipo `post` para recibir los datos de registro de usuarios, y la vinculamos a la función adecuada en el controlador (en este caso, la función `store`).
 
-[l1]:README.md
-[l2]:../back_notas_2/app/Http/Controllers/Auth/
-[l3]:../back_notas_2/app/Http/Controllers/Auth/RegisteredUserController.php
-[l4]:../back_notas_2/routes/api.php
+    ~~~php
+        Route::post(
+            'ingresar',
+            [LoginController::class, 'autenticar']
+        );
+    ~~~
+
+En Laravel, el proceso de inicio de sesión se basa en el uso de `cookies` seguras (del tipo `http-only`) que contienen `tokens`: secuencias alfanuméricas que permiten identificar la sesión ante el backend.
+
+> **Nota:** Las `cookies` son datos que el backend envía al navegador para almacenar **información de estado** (). Cuando el frontend realiza una solicitud al backend, las cookies correspondientes a ese backend son enviadas junto con la solicitud. Se puede ver información más detallada al respecto en [el sitio de MDN][l5].
+
+Laravel utiliza dos `cookies` conteniendo `tokens` específicos:
+
+- `XSRF-TOKEN`: Contiene información que permite **autenticar la conexión** ante el backend. Una conexión no autenticada será rechazada por el backend con un error 419.
+- `laravel_session`: Contiene la id de la **sesión de uso** iniciada al conectarse al backend. Se debe diferenciar de una **sesión de usuario**, ya que se trata de una _sesión anónima_ (no está vinculada a ningún usuario)
+
+El proceso es, aproximadamente, el siguiente:
+
+![Diagrama de manejo de cookies de Laravel][l6]
+
+Para que este intercambio sea posible, el backend debe tener la ruta bajo una "guardia": un _middleware_ que se encarga de
+
+[l1]: README.md
+[l2]: ../back_notas_2/app/Http/Controllers/Auth/
+[l3]: ../back_notas_2/app/Http/Controllers/Auth/RegisteredUserController.php
+[l4]: ../back_notas_2/routes/api.php
+[l5]: https://developer.mozilla.org/es/docs/Web/HTTP/Guides/Cookies
+[l6]: out/diagramaCookiesLaravel/DiagramaCookiesLaravel.png
