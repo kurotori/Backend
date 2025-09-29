@@ -14,7 +14,7 @@ Route::get('/user', function (Request $request) {
  * Permite recibir la solicitud para registrar un usuario nuevo en el sistema
  */
 Route::post(
-    '/usuario/nuevo',
+    '/usuarios/nuevo',
     [RegisteredUserController::class, 'store']
 )->middleware('web');
 

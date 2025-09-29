@@ -34,8 +34,8 @@ En el archivo `routes/api.php` ([ver en el archivo][l4]) declararemos una ruta d
 
 ```php
     Route::post(
-        'ingresar',
-        [LoginController::class, 'autenticar']
+        '/usuarios/nuevo',
+        [RegisteredUserController::class, 'store']
     );
 ```
 
@@ -57,6 +57,24 @@ Para que este intercambio sea posible, el backend debe tener la ruta bajo una "g
 > **Nota:** un `middleware` es una capa de software intermedia que facilita la comunicación entre distintos componentes de la aplicación al encapsular los procesos necesarios.
 
 Para asegurarnos de que nuestra ruta este bajo este `middleware` lo que debemos hacer es, simplemente, agregar esa información a la declaración de la ruta de la siguiente manera:
+
+```php
+    Route::middleware('web')->post(
+        '/usuarios/nuevo',
+        [RegisteredUserController::class, 'store']
+    );
+```
+
+o, alternativamente:
+
+```php
+    Route::post(
+        '/usuarios/nuevo',
+        [RegisteredUserController::class, 'store']
+    )->middleware('web');
+```
+
+Esto coloca a la ruta bajo la guardia del middleware `web`, para que tenga que usar las `cookies` de _Laravel_. 
 
 _[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
 

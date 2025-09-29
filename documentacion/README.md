@@ -2,7 +2,9 @@
 
 Esta serie de documentos contiene los pasos básicos para desarrollar un backend de _Laravel 12_ para un frontend desarrollado en _Vue 3_, y se complementa con los archivos contenidos en el directorio [**back_notas_2**][l6] de este repositorio, y con la documentación del desarrollo del frontend en el repositorio [**Frontend**][l7]
 
-> **Nota:** En los archivos mencionados por estos documentos se pueden ubicar los cambios mencionados buscando los comentarios que comienzan por la palabra clave `BACKEND` de la siguiente forma:
+Estos documentos complementan el contenido de la **[Guía de Desarrollo de APIs REST con Laravel][l9]**.
+
+> **Nota:** En los archivos mencionados por estos documentos se pueden ubicar los cambios mencionados **buscando los comentarios** que comienzan por la palabra clave `BACKEND` de la siguiente forma:
 
 ~~~php
    //BACKEND: 
@@ -13,7 +15,7 @@ Esta serie de documentos contiene los pasos básicos para desarrollar un backend
    > **NOTA: _Se debe cerrar y volver a abrir la consola para poder continuar._**
 
 2. **Generar** el proyecto con el comando `laravel new`, con las siguientes opciones:
-   - Nombre del proyecto
+   - Nombre del proyecto: **A elección**, pero se recomienda seguir la convención de nombres de `Laravel` ([ver esta publicación para más detalles][l8])
    - Starter kit: **Vue**
    - Autenticación: **Laravel built-in**
    - Testing framework: **PHPUnit**
@@ -47,3 +49,5 @@ Esta serie de documentos contiene los pasos básicos para desarrollar un backend
 [l5]:ConfiguracionDeSanctum.md
 [l6]:../back_notas_2/
 [l7]:https://github.com/kurotori/Frontend/tree/main/EjemplosBase/notas-base
+[l8]:https://github.com/alexeymezenin/laravel-best-practices/blob/master/spanish.md#sigue-la-convenci%C3%B3n-de-laravel-para-los-nombres
+[l9]:https://docs.google.com/document/d/e/2PACX-1vQeM-NoqZRWMX-9AZqMNgVnXInmweh8gW9d6Xi-SrguWBC9MrpVztjvAvDOT3LdwImd7QYJMxvzQGwG/pub
