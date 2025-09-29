@@ -2,6 +2,9 @@
 
 ## 1 - Registro de Usuarios
 
+1. [Configuración del Controlador](#a---configuración-del-controlador)
+2. [Configuración de la Ruta](#b---configuración-de-la-ruta)
+
 ### A - Configuración del Controlador
 
 Si configuramos el proyecto de Laravel como se mencionó [al comienzo de esta documentación][l1], nuestro proyecto debería contar con un directorio llamado `Auth` en `app/Http/Controllers` ([ver en el proyecto][l2]).
@@ -23,16 +26,18 @@ En este controlador encontraremos la función `store`, que usaremos para registr
 
 3. Finalmente, le agregaremos a la función un retorno con un objeto `response` que le indique al frontend el resultado de la operación y que, en caso de éxito, se redirija hacia la página de inicio de sesión mediante una variable adecuada.
 
+_[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
+
 ### B - Configuración de la Ruta
 
 En el archivo `routes/api.php` ([ver en el archivo][l4]) declararemos una ruta de tipo `post` para recibir los datos de registro de usuarios, y la vinculamos a la función adecuada en el controlador (en este caso, la función `store`).
 
-    ~~~php
-        Route::post(
-            'ingresar',
-            [LoginController::class, 'autenticar']
-        );
-    ~~~
+```php
+    Route::post(
+        'ingresar',
+        [LoginController::class, 'autenticar']
+    );
+```
 
 En Laravel, el proceso de inicio de sesión se basa en el uso de `cookies` seguras (del tipo `http-only`) que contienen `tokens`: secuencias alfanuméricas que permiten identificar la sesión ante el backend.
 
@@ -47,7 +52,11 @@ El proceso es, aproximadamente, el siguiente:
 
 ![Diagrama de manejo de cookies de Laravel][l6]
 
-Para que este intercambio sea posible, el backend debe tener la ruta bajo una "guardia": un _middleware_ que se encarga de
+Para que este intercambio sea posible, el backend debe tener la ruta bajo una "guardia": un `middleware` que se encarga de monitorear y efectivizar este proceso.
+
+> **Nota:** un `middleware` es una capa de software intermedia que facilita la comunicación entre distintos componentes de la aplicación al encapsular los procesos necesarios.
+
+_[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
 
 [l1]: README.md
 [l2]: ../back_notas_2/app/Http/Controllers/Auth/
