@@ -52,9 +52,11 @@ El proceso es, aproximadamente, el siguiente:
 
 ![Diagrama de manejo de cookies de Laravel][l6]
 
-Para que este intercambio sea posible, el backend debe tener la ruta bajo una "guardia": un `middleware` que se encarga de monitorear y efectivizar este proceso.
+Para que este intercambio sea posible, el backend debe tener la ruta bajo una "guardia": un `middleware` que se encarga de monitorear y efectivizar este proceso. En este caso, el `middleware` que utilizaremos es llamado 'web'.
 
 > **Nota:** un `middleware` es una capa de software intermedia que facilita la comunicación entre distintos componentes de la aplicación al encapsular los procesos necesarios.
+
+Para asegurarnos de que nuestra ruta este bajo este `middleware` lo que debemos hacer es, simplemente, agregar esa información a la declaración de la ruta de la siguiente manera:
 
 _[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
 
