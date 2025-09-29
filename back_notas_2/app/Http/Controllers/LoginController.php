@@ -25,9 +25,6 @@ class LoginController extends Controller
             $solicitud->session()->regenerate();
             $usuario = $solicitud->user();
 
-            //Auth::login($usuario);
-            //$sesion = $solicitud->sessi;//Auth::getSession();
-
             return response()->json(
                 [
                     'estado' => 'OK',
@@ -42,7 +39,6 @@ class LoginController extends Controller
                 [
                     'estado' => 'ERROR',
                     'mensaje' => 'Error en el nombre de usuario o la contraseña',
-                    //'sesion' => $sesion->getID()
                 ],
                 403
             );
