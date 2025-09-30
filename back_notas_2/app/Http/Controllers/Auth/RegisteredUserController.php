@@ -31,10 +31,21 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request) //: RedirectResponse BACKEND: se comenta para evitar un error por redireccionamiento
     {
+
+        /**
+         * BACKEND: Se deben tener en cuenta esta validación de datos para el registro de un usuario nuevo,
+         *          ya que son los datos que deben estar contenidos en la solicitud.
+         */
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+
+            /**
+         * BACKEND: Que el campo 'password' sea requerido (propiedad 'required') y que deba ser
+         *          confirmado (propiedad 'confirmed') implica que en la solicitud *debe incluírse*,
+         *          además del campo 'password', un campo llamado 'password_confirmation'
+         */
         ]);
         $user = User::create(
             [

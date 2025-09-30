@@ -4,13 +4,14 @@
 
 1. [Configuración del Controlador](#a---configuración-del-controlador)
 2. [Configuración de la Ruta](#b---configuración-de-la-ruta)
+3. [Registro de Usuarios](#c---registro-de-usuarios)
 
 ### A - Configuración del Controlador
 
 Si configuramos el proyecto de Laravel como se mencionó [al comienzo de esta documentación][l1], nuestro proyecto debería contar con un directorio llamado `Auth` en `app/Http/Controllers` ([ver en el proyecto][l2]).
 Este directorio contiene controladores que nos serán útiles para el registro de usuarios en nuestro sistema, particularmente [`RegisteredUserController.php`][l3].
 
-En este controlador encontraremos la función `store`, que usaremos para registrar un usuario nuevo, con algunas modificaciones, ya que la función original redirige a una página interna (asume que estamos desarrollando un proyecto que incluye frontend y backend en el mismo paquete). Por este motivo, comentaremos las siguientes líneas de código:
+En este controlador encontraremos la función `store`, que usaremos para registrar un usuario nuevo, con algunas modificaciones, ya que la función original redirige a una página interna e inicia automáticamente la sesión del nuevo usuario (asume que estamos desarrollando un proyecto que incluye frontend y backend en el mismo paquete). Por este motivo, comentaremos las siguientes líneas de código:
 
 1. En la declaración de la función `store`, comentamos el tipo de datos de retorno `RedirectResponse`:
 
@@ -18,11 +19,19 @@ En este controlador encontraremos la función `store`, que usaremos para registr
        public function store(Request $request) //:RedirectResponse
    ```
 
-2. En el cuerpo de la función `store`, comentamos el `return to_route` que se encuentra al final:
+2. En el cuerpo de la función `store`:
 
-   ```php
-        //return to_route('dashboard');
-   ```
+   - Si deseamos deshabilitar el inicio de sesión automático del nuevo usuario, comentamos la siguiente línea:
+
+     ```php
+            //Auth::login($user);
+     ```
+
+   - Comentamos la línea `return to_route` que se encuentra al final:
+
+     ```php
+             //return to_route('dashboard');
+     ```
 
 3. Finalmente, le agregaremos a la función un retorno con un objeto `response` que le indique al frontend el resultado de la operación y que, en caso de éxito, se redirija hacia la página de inicio de sesión mediante una variable adecuada.
 
@@ -74,10 +83,22 @@ o, alternativamente:
     )->middleware('web');
 ```
 
-Esto coloca a la ruta bajo la guardia del middleware `web`, para que tenga que usar las `cookies` de _Laravel_ que mencionamos. Ahora, todas las solicitudes de creación de usuarios deberán recibir, previamente, estas cookies.
+Esto coloca a la ruta bajo la guardia del middleware `web`, para que tenga que usar las `cookies` de _Laravel_ que mencionamos. Ahora, todas las solicitudes de creación de usuarios deberán recibir, previamente, estas `cookies`.
 
-> **Nota:** _Todas las solicitudes_ al backend deben solicitar **primero** una `cookie` al servidor en la ruta **/sanctum/csrf-cookie**
+Todas las `cookies` de _Laravel_ se configuran como `http-only`, esto significa que no pueden accederse desde el _DOM_ ni desde _JavaScript_, lo cual añade seguridad al sistema, ya que esto limita la posibilidad de que estas `cookies` sean capturadas mediante un ataque _XSS_.
 
+> **Nota:** Se puede conocer más sobre el rol de las `cookies` en [este documento de MDN][l7]
+
+> **Nota:** _Todas las solicitudes_ al backend, en una ruta protegida por una guardia, deben solicitar **primero**, mediante `get`, una `cookie` al servidor en la ruta **/sanctum/csrf-cookie**, para luego realizar la solicitud deseada.
+
+### C - Registro de Usuarios
+
+Para efectivizar el registro de usuarios, debemos enviar una solicitud, mediante `post`, a la ruta que establecimos (que en este ejemplo sería **/api/usuarios/nuevo**).
+
+El proceso completo de solicitudes es el siguiente:
+
+1. Solicitar `cookies` de sesión al `sanctum` mediante una petición `get` a **/sanctum/csrf-cookie**
+1. Enviar una solicitud `post` con los datos del usuario (según el método `store` del controlador **RegisteredUserController**, estos datos serían _name_ (nombre), _email_ (correo electrónico), _password_, y _password_confirmation_ (contraseña y confirmación de la contraseña), [ver notas en el archivo][l3])
 
 _[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
 
@@ -87,3 +108,4 @@ _[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
 [l4]: ../back_notas_2/routes/api.php
 [l5]: https://developer.mozilla.org/es/docs/Web/HTTP/Guides/Cookies
 [l6]: out/diagramaCookiesLaravel/DiagramaCookiesLaravel.png
+[l7]: https://developer.mozilla.org/es/docs/Web/HTTP/Guides/Cookies
