@@ -74,7 +74,10 @@ o, alternativamente:
     )->middleware('web');
 ```
 
-Esto coloca a la ruta bajo la guardia del middleware `web`, para que tenga que usar las `cookies` de _Laravel_. 
+Esto coloca a la ruta bajo la guardia del middleware `web`, para que tenga que usar las `cookies` de _Laravel_ que mencionamos. Ahora, todas las solicitudes de creación de usuarios deberán recibir, previamente, estas cookies.
+
+> **Nota:** _Todas las solicitudes_ al backend deben solicitar **primero** una `cookie` al servidor en la ruta **/sanctum/csrf-cookie**
+
 
 _[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
 

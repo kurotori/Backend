@@ -25,6 +25,7 @@ return [
 
     'allowed_origins_patterns' => [],
 
+    //BACKEND: Si estos headers se presonalizan, necesitamos asegurarnos que incluya 'x-xsrf-token'
     'allowed_headers' => ['*'],
 
     'exposed_headers' => [],
