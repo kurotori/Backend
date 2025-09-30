@@ -64,6 +64,7 @@ class RegisteredUserController extends Controller
                 'estado' => 'OK',
                 'mensaje' => 'Usuario registrado con éxito',
                 'destino' => 'inicioSesion'
+                //BACKEND: Este objeto de respuesta y sus atributos deben adaptarse a las necesidades del proyecto
             ],
             200
         );
