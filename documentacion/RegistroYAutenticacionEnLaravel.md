@@ -1,10 +1,11 @@
 # Registro y Autenticación de Usuarios en Laravel
 
-## 1 - Registro de Usuarios
+1. [Registro de Usuario](#1---registro-de-usuarios)
+    1. [Configuración del Controlador](#a---configuración-del-controlador)
+    2. [Configuración de la Ruta](#b---configuración-de-la-ruta)
+    3. [Proceso de Registro de Usuarios](#c---proceso-de-registro-de-usuarios)
 
-1. [Configuración del Controlador](#a---configuración-del-controlador)
-2. [Configuración de la Ruta](#b---configuración-de-la-ruta)
-3. [Registro de Usuarios](#c---registro-de-usuarios)
+## 1 - Registro de Usuarios
 
 ### A - Configuración del Controlador
 
@@ -88,10 +89,9 @@ Esto coloca a la ruta bajo la guardia del middleware `web`, para que tenga que u
 Todas las `cookies` de _Laravel_ se configuran como `http-only`, esto significa que no pueden accederse desde el _DOM_ ni desde _JavaScript_, lo cual añade seguridad al sistema, ya que esto limita la posibilidad de que estas `cookies` sean capturadas mediante un ataque _XSS_.
 
 > **Nota:** Se puede conocer más sobre el rol de las `cookies` en [este documento de MDN][l7]
-
 > **Nota:** _Todas las solicitudes_ al backend, en una ruta protegida por una guardia, deben solicitar **primero**, mediante `get`, una `cookie` al servidor en la ruta **/sanctum/csrf-cookie**, para luego realizar la solicitud deseada.
 
-### C - Registro de Usuarios
+### C - Proceso de Registro de Usuarios
 
 Para efectivizar el registro de usuarios, debemos enviar una solicitud, mediante `post`, a la ruta que establecimos (que en este ejemplo sería **/api/usuarios/nuevo**).
 
@@ -100,7 +100,13 @@ El proceso completo de solicitudes es el siguiente:
 1. Solicitar `cookies` de sesión al `sanctum` mediante una petición `get` a **/sanctum/csrf-cookie**
 1. Enviar una solicitud `post` con los datos del usuario (según el método `store` del controlador **RegisteredUserController**, estos datos serían _name_ (nombre), _email_ (correo electrónico), _password_, y _password_confirmation_ (contraseña y confirmación de la contraseña), [ver notas en el archivo][l3])
 
+Si los datos son correctos, se crea un registro de usuario y se genera un retorno con respuesta en _JSON_ para interpretarse en el frontend ([ver notas en el archivo][l3]).
+
+De lo contrario se genera un error (por lo general de [código 422][l8])
+
 _[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
+
+## 
 
 [l1]: README.md
 [l2]: ../back_notas_2/app/Http/Controllers/Auth/
@@ -109,3 +115,4 @@ _[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
 [l5]: https://developer.mozilla.org/es/docs/Web/HTTP/Guides/Cookies
 [l6]: out/diagramaCookiesLaravel/DiagramaCookiesLaravel.png
 [l7]: https://developer.mozilla.org/es/docs/Web/HTTP/Guides/Cookies
+[l8]: https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status#errores_de_servidor
