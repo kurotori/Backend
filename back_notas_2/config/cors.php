@@ -30,7 +30,7 @@ return [
 
     'exposed_headers' => [],
 
-    'max_age' => 0,
+    'max_age' => 300,
 
     //BACKEND: cambiar el valor de 'support_credentials'  a 'true'
     'supports_credentials' => true,
