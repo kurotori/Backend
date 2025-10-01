@@ -1,6 +1,6 @@
-# Registro y Autenticación de Usuarios en Laravel
+# Registro de Usuarios en Laravel
 
-1. [Registro de Usuario](#1---registro-de-usuarios)
+1. [Registro de Usuarios](#1---registro-de-usuarios)
     1. [Configuración del Controlador](#a---configuración-del-controlador)
     2. [Configuración de la Ruta](#b---configuración-de-la-ruta)
     3. [Proceso de Registro de Usuarios](#c---proceso-de-registro-de-usuarios)
@@ -84,7 +84,7 @@ o, alternativamente:
     )->middleware('web');
 ```
 
-Esto coloca a la ruta bajo la guardia del middleware `web`, para que tenga que usar las `cookies` de _Laravel_ que mencionamos. Ahora, todas las solicitudes de creación de usuarios deberán recibir, previamente, estas `cookies`.
+Esto coloca a la ruta bajo la guardia del middleware `web`, para que tenga que usar las `cookies` de _Laravel_ que mencionamos. Ahora, todas las solicitudes de creación de usuarios deberán recibir, previamente, estas `cookies` para que sean aceptadas por el backend.
 
 Todas las `cookies` de _Laravel_ se configuran como `http-only`, esto significa que no pueden accederse desde el _DOM_ ni desde _JavaScript_, lo cual añade seguridad al sistema, ya que esto limita la posibilidad de que estas `cookies` sean capturadas mediante un ataque _XSS_.
 
@@ -106,7 +106,7 @@ De lo contrario se genera un error (por lo general de [código 422][l8])
 
 _[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
 
-## 
+## Siguiente: [Autenticación de Usuarios][l9]
 
 [l1]: README.md
 [l2]: ../back_notas_2/app/Http/Controllers/Auth/
@@ -116,3 +116,4 @@ _[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
 [l6]: out/diagramaCookiesLaravel/DiagramaCookiesLaravel.png
 [l7]: https://developer.mozilla.org/es/docs/Web/HTTP/Guides/Cookies
 [l8]: https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status#errores_de_servidor
+[l9]: AutenticacionDeUsuarios.md
