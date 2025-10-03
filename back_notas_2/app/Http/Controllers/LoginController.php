@@ -24,13 +24,14 @@ class LoginController extends Controller
             $solicitud->session()->start();
             $solicitud->session()->regenerate();
             $usuario = $solicitud->user();
+            $sesion = $solicitud->session();
 
             return response()->json(
                 [
                     'estado' => 'OK',
                     'mensaje' => 'log in exitoso',
                     'usuario' => $usuario,
-                    //'sesion' => $sesion->getID()
+                    'sesion' => $sesion->getID()
                 ],
                 200
             );
