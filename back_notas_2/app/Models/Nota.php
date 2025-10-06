@@ -16,4 +16,7 @@ class Nota extends Model
         'titulo',
         'texto'
     ];
+
+    //BACKEND: la característica BelongsTo permite identificar el registro
+    //          de la *otra entidad* al que un elemento de esta
 }

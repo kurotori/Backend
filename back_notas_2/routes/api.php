@@ -26,3 +26,14 @@ Route::middleware('web')->post(
     [LoginController::class, 'autenticar']
     //[AuthController::class, 'login']
 );
+
+
+/**
+ * BACKEND: Grupo de rutas, en este caso, para funciones de usuario que requieren
+ *          autenticación
+ */
+Route::prefix('usuarios')->middleware('auth:sanctum')->group(
+    function(){
+        Route::post('cerrarSesion', [LoginController::class,'cerrarSesion']);
+    }
+);

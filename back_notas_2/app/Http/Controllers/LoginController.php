@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Stmt\TryCatch;
 
 class LoginController extends Controller
 {
@@ -31,7 +33,7 @@ class LoginController extends Controller
                     'estado' => 'OK',
                     'mensaje' => 'log in exitoso',
                     'usuario' => $usuario,
-                    'sesion' => $sesion->getID()
+                    'destino' => 'inicio'
                 ],
                 200
             );
@@ -43,6 +45,23 @@ class LoginController extends Controller
                 ],
                 403
             );
+        }
+    }
+
+
+    public function cerrarSesion(Request $solicitud){
+        try {
+            Session::flush();
+            Auth::logout();
+            return response()->json(
+                [
+                    'estado'=>'OK',
+                    'mensaje'=>'Sesión cerrada con éxito'
+                ],
+                200
+            );
+        } catch (\Throwable $th) {
+            //throw $th;
         }
     }
 }
