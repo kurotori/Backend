@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Nota extends Model
 {
@@ -18,5 +19,10 @@ class Nota extends Model
     ];
 
     //BACKEND: la característica BelongsTo permite identificar el registro
-    //          de la *otra entidad* al que un elemento de esta
+    //          de la *otra entidad* al que un registro de *esta entidad* pertenece
+
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
