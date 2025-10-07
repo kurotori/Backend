@@ -36,7 +36,7 @@ En este controlador encontraremos la función `store`, que usaremos para registr
 
 3. Finalmente, le agregaremos a la función un retorno con un objeto `response` que le indique al frontend el resultado de la operación y que, en caso de éxito, se redirija hacia la página de inicio de sesión mediante una variable adecuada.
 
-_[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
+_[Volver al Comienzo](#registro-de-usuarios-en-laravel)_
 
 ### B - Configuración de la Ruta
 
@@ -104,7 +104,7 @@ Si los datos son correctos, se crea un registro de usuario y se genera un retorn
 
 De lo contrario se genera un error (por lo general de [código 422][l8])
 
-_[Volver al Comienzo](#registro-y-autenticación-de-usuarios-en-laravel)_
+_[Volver al Comienzo](#registro-de-usuarios-en-laravel)_
 
 ## Siguiente: [Autenticación de Usuarios][l9]
 
