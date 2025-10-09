@@ -31,7 +31,7 @@ Estos documentos complementan el contenido de la **[Guía de Desarrollo de APIs 
    Por ejemplo, para un modelo llamado `Cosa`, el comando sería: `php artisan make:model Cosa -m`
    De lo contrario, **es posible crear migraciones de forma individual** con el comando `php artisan make:migration`
    **Y los modelos** mediante el comando `php artisan make:model`
-   Luego de definir las migraciones, se debe ejecutar el comando `php artisan migrate` para que se apliquen sus cambios a la base de datos del sistema. 
+   Luego de definir las migraciones, se debe ejecutar el comando `php artisan migrate` para que se apliquen sus cambios a la base de datos del sistema.
    > (Hay más información sobre el manejo de bases de datos [en este documento][l3])
 
 6. **Configurar** las características de los modelos (campos rellenables, campos ocultos, relaciones entre modelos, etc.)
