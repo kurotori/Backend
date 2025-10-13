@@ -1,14 +1,11 @@
 {
-	"folders": [
-		{
-			"path": "back_notas_2"
-		},
-		{
-			"path": "documentacion"
-		},
-		{
-			"path": "../Frontend/EjemplosBase/notas-base"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "back_notas_2"
+    },
+    {
+      "path": "documentacion"
+    }
+  ],
+  "settings": {}
 }
