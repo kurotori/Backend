@@ -101,11 +101,61 @@ Para efectivizar el registro de usuarios, debemos enviar una solicitud, mediante
 El proceso completo de solicitudes es el siguiente:
 
 1. Solicitar `cookies` de sesión al `sanctum` mediante una petición `get` a **/sanctum/csrf-cookie**
-1. Enviar una solicitud `post` con los datos del usuario (según el método `store` del controlador **RegisteredUserController**, estos datos serían _name_ (nombre), _email_ (correo electrónico), _password_, y _password_confirmation_ (contraseña y confirmación de la contraseña), [ver notas en el archivo][l3])
 
-Si los datos son correctos, se crea un registro de usuario y se genera un retorno con respuesta en _JSON_ para interpretarse en el frontend ([ver notas en el archivo][l3]).
+1. Enviar una solicitud `post` con los datos del usuario, que, según el método `store()` del controlador **RegisteredUserController**, estos datos deberían ser:
+    - _name_ (nombre) 
+    - _email_ (correo electrónico)
+    - _password_, y _password_confirmation_ (contraseña y confirmación de la contraseña)
 
-De lo contrario se genera un error (por lo general de [código 422][l8])
+    [ver notas en el archivo][l3]
+
+    > **Nota:** _Estos datos pueden modificarse de acuerdo a las necesidades de cada proyecto, modificando el modelo de usuario y las migraciones correspondientes_
+
+    Estos datos se reciben mediante un objeto de clase `Request` llamado `$request` que se declara como parámetro de entrada del método `store()`.
+
+    ```php
+        public function store(Request $request)
+        {
+
+        }
+    ```
+
+    Estos datos deben pasar por un proceso de **validación** para evitar el ingreso de datos maliciosos, y que el servidor del backend malgaste potencia de cómputo en una solicitud mal formada. Esta validación se realiza mediante el método `validate()`, que se encuentra en la clase `Request`, por lo que lo podemos llamar diréctamente del objeto `$request` y pasarle los parámetros de validación mediante un array:
+
+    ```php
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+    ```
+
+    Si los datos son correctos, se crea un registro de usuario mediante la función `create()` del modelo **User**, al cual le pasamos un array incluyendo los datos necesarios desde el objeto `$request`:
+
+    ```php
+        $user = User::create(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]
+        );
+    ```
+
+1. Almacenamos el detalle del usuario creado en el objeto `$user`, y se genera un retorno con respuesta en _JSON_ para interpretarse en el frontend ([ver notas en el archivo][l3]).
+
+    ```php
+        return response()->json(
+            [
+                'estado' => 'OK',
+                'mensaje' => 'Usuario registrado con éxito',
+                'destino' => 'inicioSesion'
+            ],
+            200
+        );
+    ```
+
+1. Si la validación no se supera, o por algún otro error (el usuario ya existe, etc.), se genera una respuesta indicando el error (por lo general de [código 422][l8])
 
 _[Volver al Comienzo][inicio]_
 ***

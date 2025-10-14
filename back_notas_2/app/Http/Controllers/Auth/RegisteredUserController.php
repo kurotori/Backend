@@ -29,7 +29,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request) //: RedirectResponse BACKEND: se comenta para evitar un error por redireccionamiento
+    public function store(Request $request) //: RedirectResponse   BACKEND: se comenta para evitar un error por redireccionamiento
     {
 
         /**
@@ -40,13 +40,14 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-
+        ]);
             /**
          * BACKEND: Que el campo 'password' sea requerido (propiedad 'required') y que deba ser
          *          confirmado (propiedad 'confirmed') implica que en la solicitud *debe incluírse*,
          *          además del campo 'password', un campo llamado 'password_confirmation'
          */
-        ]);
+
+
         $user = User::create(
             [
                 'name' => $request->name,
@@ -57,7 +58,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        //Auth::login($user);
+        //Auth::login($user); BACKEND: Se comenta para evitar que el sistema inicie automáticamente sesión
+        //                        recién creado
 
         return response()->json(
             [
