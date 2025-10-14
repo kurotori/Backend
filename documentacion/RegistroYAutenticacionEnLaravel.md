@@ -5,6 +5,8 @@
     2. [Configuración de la Ruta](#b---configuración-de-la-ruta)
     3. [Proceso de Registro de Usuarios](#c---proceso-de-registro-de-usuarios)
 
+***
+
 ## 1 - Registro de Usuarios
 
 ### A - Configuración del Controlador
@@ -37,6 +39,7 @@ En este controlador encontraremos la función `store`, que usaremos para registr
 3. Finalmente, le agregaremos a la función un retorno con un objeto `response` que le indique al frontend el resultado de la operación y que, en caso de éxito, se redirija hacia la página de inicio de sesión mediante una variable adecuada.
 
 _[Volver al Comienzo][inicio]_
+***
 
 ### B - Configuración de la Ruta
 
@@ -105,8 +108,9 @@ Si los datos son correctos, se crea un registro de usuario y se genera un retorn
 De lo contrario se genera un error (por lo general de [código 422][l8])
 
 _[Volver al Comienzo][inicio]_
+***
 
-## Siguiente: [Autenticación de Usuarios][l9]
+## Siguiente: [Autenticación de Usuarios][siguiente]
 
 [inicio]: #registro-de-usuarios-en-laravel
 [l1]: README.md
@@ -117,4 +121,4 @@ _[Volver al Comienzo][inicio]_
 [l6]: out/diagramaCookiesLaravel/DiagramaCookiesLaravel.png
 [l7]: https://developer.mozilla.org/es/docs/Web/HTTP/Guides/Cookies
 [l8]: https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status#errores_de_servidor
-[l9]: AutenticacionDeUsuarios.md
+[siguiente]: AutenticacionDeUsuarios.md

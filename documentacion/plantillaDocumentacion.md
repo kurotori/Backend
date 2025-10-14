@@ -12,6 +12,8 @@
 
 Contenido del elemento 1
 
+Esto es un `detalle de código`
+
 ```lang
 Esto es un bloque de código
 ```
@@ -27,7 +29,7 @@ Contenido del elemento 2
 
 ### Sub Elemento
 
-Contenido del sub elemento
+Contenido del sub elemento.
 
 [_Volver al Inicio_][inicio]
 ***
