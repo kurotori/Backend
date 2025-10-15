@@ -65,12 +65,78 @@ Este método retorna `true`, si la autenticación es exitosa. O `False`, si no l
     }
 ```
 
-Si la autenticación es exitosa, iniciamos el proceso de vinculación de la sesión al usuario:
+Si la autenticación es exitosa, iniciamos el proceso de vinculación de la sesión al usuario, aprovechando funcionalidades del objeto `$solicitud`:
 
-1. Solicitamos al sistema que inicie una sesión vinculada a la solicitud (método `session()->start()`)
-2. Regeneramos la `id` de la sesión, para minimizar la posibilidad de [**ataques por fijación de sesiones**][l3]
-3. 
+1. Solicitamos al sistema que inicie una sesión vinculada a la solicitud (método `session()->start()`):
+
+    ```php
+        if ( Auth::attempt($credenciales) ) {
+            $solicitud->session()->start();
+        }    
+    ```
+
+2. Regeneramos la `id` de la sesión, para minimizar la posibilidad de [**ataques por fijación de sesiones**][l3] (método `session()->regenerate()`):
+
+    ```php
+        if ( Auth::attempt($credenciales) ) {
+            $solicitud->session()->start();
+            $solicitud->session()->regenerate();
+        }
+    ```
+
+3. Extraer los datos del usuario autenticado para transmitirlos en la respuesta:
+
+    ```php
+        if ( Auth::attempt($credenciales) ) {
+            $solicitud->session()->start();
+            $solicitud->session()->regenerate();
+            
+            $usuario = $solicitud->user();
+        }
+    ```
+
+4. Se genera y envía una respuesta del servidor con los datos necesarios para confirmar el inicio de sesión exitoso en el frontend (los datos del usuario, por ejemplo):
+
+    ```php
+        if ( Auth::attempt($credenciales) ) {
+            $solicitud->session()->start();
+            $solicitud->session()->regenerate();
+            
+            $usuario = $solicitud->user();
+
+            return response()->json(
+                [
+                    'estado' => 'OK',
+                    'mensaje' => 'Inicio de Sesión exitoso',
+                    'usuario' => $usuario,
+                    'destino' => 'inicio'
+                ],
+                200
+            );
+        }
+    ```
+
+5. Si la autenticación falla, se genera una respuesta de error (de acuerdo al estándar, el código de error a enviar sería [401][l4]):
+
+    ```php
+        else {
+            return response()->json(
+                [
+                    'estado' => 'ERROR',
+                    'mensaje' => 'Error en el nombre de usuario o la contraseña',
+                ],
+                401
+            );
+        }
+    ```
+
+***
+
+### Cerrar una sesión
+
+Para cerrar una sesión iniciada crearemos una función pública semejante a la anterior, que recibe un objeto `$solicitud` de clase `Request`.
 
 [l1]: ../back_notas_2/app/Http/Controllers/Auth/
 [l2]: ../back_notas_2/app/Http/Controllers/LoginController.php
 [l3]: https://owasp.org/www-community/attacks/Session_fixation
+[l4]: https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status/401

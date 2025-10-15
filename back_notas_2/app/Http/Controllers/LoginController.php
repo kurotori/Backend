@@ -25,13 +25,14 @@ class LoginController extends Controller
         if (Auth::attempt($credenciales)) {
             $solicitud->session()->start();
             $solicitud->session()->regenerate();
+
             $usuario = $solicitud->user();
-            $sesion = $solicitud->session();
+            //$sesion = $solicitud->session();
 
             return response()->json(
                 [
                     'estado' => 'OK',
-                    'mensaje' => 'log in exitoso',
+                    'mensaje' => 'Inicio de Sesión exitoso',
                     'usuario' => $usuario,
                     'destino' => 'inicio'
                 ],
@@ -43,7 +44,7 @@ class LoginController extends Controller
                     'estado' => 'ERROR',
                     'mensaje' => 'Error en el nombre de usuario o la contraseña',
                 ],
-                403
+                401
             );
         }
     }
@@ -51,6 +52,7 @@ class LoginController extends Controller
 
     public function cerrarSesion(Request $solicitud){
         try {
+            $solicitud->session()->flush();
             Session::flush();
             Auth::logout();
             return response()->json(
