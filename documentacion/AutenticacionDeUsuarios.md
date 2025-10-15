@@ -21,7 +21,7 @@ Crearemos un controlador desde la consola con el comando
     php artisan make:controller
 ```
 
-En este ejemplo, creamos un controlador llamado LoginController ([ver archivo][l2]). En este controlador vamos a definir las acciones relacionadas con el inicio de sesión, específicamente:
+En este ejemplo, creamos un controlador llamado **LoginController** ([ver archivo][l2]). En este controlador vamos a definir las acciones relacionadas con el inicio de sesión, específicamente:
 
 - Autenticar un usuario e iniciar una sesión
 - Cerrar una sesión
