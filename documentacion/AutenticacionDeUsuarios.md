@@ -1,7 +1,7 @@
 # Autenticación de Usuarios en Laravel
 
 1. [Configuración del Controlador](#1---configuración-del-controlador)
-    1.[Iniciar una sesión](#iniciar-una-sesión)
+    1. [Iniciar una sesión](#iniciar-una-sesión)
 2. [Configuración de la Ruta](#b---configuración-de-la-ruta)
 3. [Proceso de Registro de Usuarios](#c---proceso-de-registro-de-usuarios)
 
