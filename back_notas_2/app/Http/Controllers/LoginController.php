@@ -52,9 +52,11 @@ class LoginController extends Controller
 
     public function cerrarSesion(Request $solicitud){
         try {
-            $solicitud->session()->flush();
-            Session::flush();
             Auth::logout();
+            $solicitud->session()->flush();
+            $solicitud->session()->invalidate();
+            $solicitud->session()->regenerateToken();
+
             return response()->json(
                 [
                     'estado'=>'OK',

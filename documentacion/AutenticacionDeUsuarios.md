@@ -134,7 +134,25 @@ Si la autenticación es exitosa, iniciamos el proceso de vinculación de la sesi
 
 ### Cerrar una sesión
 
-Para cerrar una sesión iniciada crearemos una función pública semejante a la anterior, que recibe un objeto `$solicitud` de clase `Request`.
+Para cerrar una sesión iniciada crearemos una función pública semejante a la anterior, que recibirá como parámetro un objeto `$solicitud` de clase `Request`.
+
+```php
+    public function cerrarSesion(Request $solicitud){
+
+    }
+```
+
+El proceso de cierre de sesión es el siguiente:
+
+1. Se realiza una llamada a al `facade` **Auth** para ejecutar el método `logout()` y desvincular la sesión del usuario identificado en la sesión.
+
+    ```php
+        Auth::logout();
+    ```
+
+> **Nota:** _Un `facade`, o "fachada", es una estructura de Laravel que permite acceder a recursos de la sesión, la base de datos, etc. sin tener que realizar una inyección de dependencias (como cuando dependemos de un objeto de la clase `Request` para obtener datos de la solicitud). Son útiles para simplificar el código, pero se debe tener cuidado al usar `facades` para evitar que nuestras funciones presenten abuso de alcance._
+
+2. 
 
 [l1]: ../back_notas_2/app/Http/Controllers/Auth/
 [l2]: ../back_notas_2/app/Http/Controllers/LoginController.php
