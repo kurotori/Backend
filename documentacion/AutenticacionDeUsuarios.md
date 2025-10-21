@@ -2,6 +2,7 @@
 
 1. [Configuración del Controlador](#1---configuración-del-controlador)
     1. [Iniciar una sesión](#iniciar-una-sesión)
+    2. [Cerrar una sesión](#cerrar-una-sesión)
 2. [Configuración de la Ruta](#b---configuración-de-la-ruta)
 3. [Proceso de Registro de Usuarios](#c---proceso-de-registro-de-usuarios)
 
@@ -150,9 +151,22 @@ El proceso de cierre de sesión es el siguiente:
         Auth::logout();
     ```
 
-> **Nota:** _Un `facade`, o "fachada", es una estructura de Laravel que permite acceder a recursos de la sesión, la base de datos, etc. sin tener que realizar una inyección de dependencias (como cuando dependemos de un objeto de la clase `Request` para obtener datos de la solicitud). Son útiles para simplificar el código, pero se debe tener cuidado al usar `facades` para evitar que nuestras funciones presenten abuso de alcance._
+    > **Nota:** _Un `facade`, o "fachada", es una estructura de Laravel que permite acceder a recursos de la sesión, la base de datos, etc. sin tener que realizar una inyección de dependencias (como cuando dependemos de un objeto de la clase `Request` para obtener datos de la solicitud). Son útiles para simplificar el código, pero se debe tener cuidado al usar `facades` para evitar que nuestras funciones presenten abuso de alcance._
 
-2. 
+2. Recuperamos la sesión del usuario desde la solicitud y realizamos las siguientes tareas:
+    1. Limpiamos todos los datos asociados a la sesión que se hayan almacenado en el backend utilizando el método `session()->flush()`:
+
+    ```php
+        $solicitud->session()->flush();
+    ```
+
+    1. Invalidamos la sesión del usuario para asegurarnos que no siga asociada al mismo mediante el método `session()->invalidate()`:
+
+    ```php
+        $solicitud->session()->invalidate();
+    ```
+
+    1. 
 
 [l1]: ../back_notas_2/app/Http/Controllers/Auth/
 [l2]: ../back_notas_2/app/Http/Controllers/LoginController.php
