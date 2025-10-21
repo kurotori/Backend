@@ -55,7 +55,6 @@ Para lograr una adecuada autenticación, nuestro backen **debe expedir `cookies`
    - `support_credentials`: Se debe establecer en `true` para habilitar el envío de credenciales (las `cookies` que le aseguran al backend que la conexión es confiable) para la autenticación.
    > **Nota:** El archivo `config/cors.php` establece el manejo del _Intercambio de Recursos de Origen Cruzado_ (en inglés: _Cross-Origin Resource Sharing_) y es una medida de seguridad que permite establecer cuáles son los dominios confiables para el backend como orígen de datos. Se puede leer más al respecto [en el sitio de MDN][l7].
 
-
 Ahora `sanctum` debería ser capaz de expedir cookies correctamente configuradas.
 
 ## Siguiente: [Registro y Autenticación][l5]

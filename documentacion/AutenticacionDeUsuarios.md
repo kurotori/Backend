@@ -9,7 +9,7 @@
 
 Como toda fucionalidad del backend, la debemos manejar mediante un **controlador**.
 
-La instalación del _starter-kit_ de _Vue_ nos a dejado varios controladores que manejan muchas de las funcionalidades necesarias en el directorio [app/Http/Controllers/Auth][l1]. 
+La instalación del _starter-kit_ de _Vue_ nos a dejado varios controladores que manejan muchas de las funcionalidades necesarias en el directorio [app/Http/Controllers/Auth][l1].
 
 Lamentablemente, estas funcionalidades estan pensadas para trabajar con _vistas_ en un proyecto de _Laravel_ con frontend incluído, y no podemos usarlas directamente si queremos usar nuestro proyecto _solo_ como backend .
 
