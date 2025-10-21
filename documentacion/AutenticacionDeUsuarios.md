@@ -166,7 +166,11 @@ El proceso de cierre de sesión es el siguiente:
         $solicitud->session()->invalidate();
     ```
 
-    1. 
+    1. Forzamos la regeneración del token CSRF, como en toda solicitud que involucre manejo de sesiones en el servidor, mediante el método `session()->regenerateToken()`:
+
+    ```php
+        $solicitud->session()->regenerateToken();
+    ```
 
 [l1]: ../back_notas_2/app/Http/Controllers/Auth/
 [l2]: ../back_notas_2/app/Http/Controllers/LoginController.php
