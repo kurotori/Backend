@@ -103,7 +103,7 @@ El proceso completo de solicitudes es el siguiente:
 1. Solicitar `cookies` de sesión al `sanctum` mediante una petición `get` a **/sanctum/csrf-cookie**
 
 1. Enviar una solicitud `post` con los datos del usuario, que, según el método `store()` del controlador **RegisteredUserController**, estos datos deberían ser:
-    - _name_ (nombre) 
+    - _name_ (nombre)
     - _email_ (correo electrónico)
     - _password_, y _password_confirmation_ (contraseña y confirmación de la contraseña)
 
