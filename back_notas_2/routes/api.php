@@ -24,7 +24,6 @@ Route::post(
 Route::middleware('web')->post(
     'ingresar',
     [LoginController::class, 'autenticar']
-    //[AuthController::class, 'login']
 );
 
 

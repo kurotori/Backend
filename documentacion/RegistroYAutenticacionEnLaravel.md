@@ -65,7 +65,7 @@ El proceso es, aproximadamente, el siguiente:
 
 ![Diagrama de manejo de cookies de Laravel][l6]
 
-Para que este intercambio sea posible, el backend debe tener la ruta bajo una "guardia": un `middleware` que se encarga de monitorear y efectivizar este proceso. En este caso, el `middleware` que utilizaremos es llamado 'web'.
+Para que este intercambio sea posible, el backend debe tener la ruta bajo una **"guardia"**: un `middleware` que se encarga de monitorear y efectivizar este proceso. En este caso, el `middleware` que utilizaremos es llamado 'web'.
 
 > **Nota:** un `middleware` es una capa de software intermedia que facilita la comunicación entre distintos componentes de la aplicación al encapsular los procesos necesarios.
 

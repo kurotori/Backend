@@ -51,21 +51,18 @@ class LoginController extends Controller
 
 
     public function cerrarSesion(Request $solicitud){
-        try {
-            Auth::logout();
-            $solicitud->session()->flush();
-            $solicitud->session()->invalidate();
-            $solicitud->session()->regenerateToken();
+        Auth::logout();
+        $solicitud->session()->flush();
+        $solicitud->session()->invalidate();
+        $solicitud->session()->regenerateToken();
 
-            return response()->json(
-                [
-                    'estado'=>'OK',
-                    'mensaje'=>'Sesión cerrada con éxito'
-                ],
-                200
-            );
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+        return response()->json(
+            [
+                'estado'=>'OK',
+                'mensaje'=>'Sesión cerrada con éxito',
+                'destino'=>'login'
+            ],
+            200
+        );
     }
 }

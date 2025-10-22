@@ -3,7 +3,7 @@
 1. [Configuración del Controlador](#1---configuración-del-controlador)
     1. [Iniciar una sesión](#iniciar-una-sesión)
     2. [Cerrar una sesión](#cerrar-una-sesión)
-2. [Configuración de la Ruta](#b---configuración-de-la-ruta)
+2. [Configuración de la Ruta](#2---configuración-de-la-ruta)
 3. [Proceso de Registro de Usuarios](#c---proceso-de-registro-de-usuarios)
 
 ## 1 - Configuración del Controlador
@@ -131,6 +131,7 @@ Si la autenticación es exitosa, iniciamos el proceso de vinculación de la sesi
         }
     ```
 
+[_Volver al Inicio_][inicio]
 ***
 
 ### Cerrar una sesión
@@ -172,7 +173,42 @@ El proceso de cierre de sesión es el siguiente:
         $solicitud->session()->regenerateToken();
     ```
 
+    1. Finalmente, enviamos un mensaje de confirmación al frontend:
+
+    ```php
+        return response()->json(
+            [
+                'estado'=>'OK',
+                'mensaje'=>'Sesión cerrada con éxito',
+                'destino'=>'login'
+            ],
+            200
+        );
+    ```
+
+[_Volver al Inicio_][inicio]
+***
+
+## 2 - Configuración de la ruta
+
+Para acceder a estas funcionalidades, estableceremos las rutas correspondientes en el archivo `routes/api.php`([ver en el archivo][l5]).
+
+Esto puede lograrse de diferentes maneras:
+
+### Mediante rutas individuales
+
+Simplemente definimos cada una de las rutas que necesitamos, estableciendo, además, las **guardias** necesarias para un acceso seguro a las mismas.
+
+En el caso de funcionalidades de autenticación de usuarios, utilizaremos como guardia los _middlewares_ `web`, para el inicio de sesión, y `auth:sanctum` para el cierre de sesión.
+
+1. #### Acceso a inicio de sesión
+
+    Para autenticar una sesión, el proceso debe realizarse mediante el método `post`, ya que las credenciales del usuario son **datos sensibles** que deben viajar protegidos en la conexión.
+
+
+[inicio]: #autenticación-de-usuarios-en-laravel
 [l1]: ../back_notas_2/app/Http/Controllers/Auth/
 [l2]: ../back_notas_2/app/Http/Controllers/LoginController.php
 [l3]: https://owasp.org/www-community/attacks/Session_fixation
 [l4]: https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status/401
+[l5]: ../back_notas_2/routes/api.php
