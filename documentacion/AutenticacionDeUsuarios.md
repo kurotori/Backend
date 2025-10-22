@@ -205,6 +205,27 @@ En el caso de funcionalidades de autenticación de usuarios, utilizaremos como g
 
     Para autenticar una sesión, el proceso debe realizarse mediante el método `post`, ya que las credenciales del usuario son **datos sensibles** que deben viajar protegidos en la conexión.
 
+    Crearemos nuestras rutas de acuerdo al siguiente patrón:
+
+    ```php
+        Route::post(
+            'uri/de/la/ruta',
+            [Controlador::class, 'nombreDeLaFunción']
+        )->middleware('guardia');
+    ```
+
+    O, alternativamente:
+
+    ```php
+        Route::middleware('guardia')->post(
+            'uri/de/la/ruta',
+            [Controlador::class, 'nombreDeLaFunción']
+        );
+    ```
+
+    > **Nota:** se denomina **URI**, o _Identificador Úniforme de Recurso_, a una _URL_ que permite acceder a un recurso o funcionalidad provistos por una aplicación web. Para más detalles, se recomienda leer [este artículo de MDN al respecto][l6].
+
+
 
 [inicio]: #autenticación-de-usuarios-en-laravel
 [l1]: ../back_notas_2/app/Http/Controllers/Auth/
@@ -212,3 +233,4 @@ En el caso de funcionalidades de autenticación de usuarios, utilizaremos como g
 [l3]: https://owasp.org/www-community/attacks/Session_fixation
 [l4]: https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status/401
 [l5]: ../back_notas_2/routes/api.php
+[l6]: https://developer.mozilla.org/en-US/docs/Web/URI
