@@ -1,0 +1,13 @@
+@startuml DiagramaMVC
+<style>
+    root {
+        FontColor #?black:white
+    }
+</style>
+
+title Patrón Modelo, Vista, Controlador
+
+database OrigenDeDatos
+participant modelo
+
+@enduml
