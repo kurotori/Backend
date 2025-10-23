@@ -1,18 +1,44 @@
 # Documentación: Desarrollo de un Backend _Laravel_ para un frontend _Vue_
 
+## Lista de Contenidos:
+
+1. [Introducción](#introducción)
+2. Instalación de Requerimientos
+
+***
+
+## Introducción
+
 Esta serie de documentos contiene los pasos básicos para desarrollar un backend de _Laravel 12_ para un frontend desarrollado en _Vue 3_, y se complementa con los archivos contenidos en el directorio [**back_notas_2**][l6] de este repositorio, y con la documentación del desarrollo del frontend en el repositorio [**Frontend**][l7]
 
 Estos documentos complementan el contenido de la **[Guía de Desarrollo de APIs REST con Laravel][l9]**.
 
-> **Nota:** En los archivos mencionados por estos documentos se pueden ubicar los cambios mencionados **buscando los comentarios** que comienzan por la palabra clave `BACKEND` de la siguiente forma:
+> **Nota:** En los archivos mencionados por estos documentos se pueden ubicar los cambios mencionados en los mismos **buscando los comentarios** que comienzan por la palabra clave `BACKEND` de la siguiente forma:
 
 ~~~php
    //BACKEND: 
 ~~~
 
-1. **Instalar** los requerimientos para el desarrollo de Laravel mediante [el comando indicado en la documentación oficial][l1].
+***
 
-   > **NOTA: _Se debe cerrar y volver a abrir la consola para poder continuar._**
+## Instalación de Requerimientos
+
+1. **Entorno de Desarrollo**
+
+Esta documentación asume que nuestro sistema tiene instalado una _IDE_ (_Entorno de Desarrollo Integrado_) adecuada para el desarrollo de proyectos de este tipo, como ser [Visual Studio Code][l5], [Apache Netbeans][l10], [Sublime Text][l11], etc.
+
+De aplicarse, también es recomendable el asegurarse de que nuestra _IDE_ cuente con las extensiones o plugins recomendados para el desarrollo de aplicaciones web con _PHP_. En el caso de Visual Studio Code, la [Guía de Desarrollo][l9] incluye un listado de extensiones recomendadas.
+
+Esta documentación fue desarrollada con Visual Studio Code, pero no debería haber cambios substanciales en aplicar los mismos pasos con cualquier otra _IDE_.
+
+Asimismo, se debe tener abierta una **consola o terminal** del sistema, en el directorio que contendrá nuestro proyecto, para la ejecución de ciertos comandos.
+
+2. **Requerimientos del Sistema**
+Se recomienda **fuertemente** el instalar los requerimientos para el desarrollo de Laravel mediante [el comando indicado en la documentación oficial][l1] usando la consola del sistema.
+
+   > **NOTA: _Se debe cerrar y volver a abrir la consola para poder continuar_** ya que se debe recargar el entorno del sistema para que reconozca los nuevos comandos que se instalan en este paso.
+
+Ahora 
 
 2. **Generar** el proyecto con el comando `laravel new`, con las siguientes opciones:
    - Nombre del proyecto: **A elección**, pero se recomienda seguir la convención de nombres de `Laravel` ([ver esta publicación para más detalles][l8])
@@ -40,14 +66,17 @@ Estos documentos complementan el contenido de la **[Guía de Desarrollo de APIs 
 
 8. **Establecer** las rutas de acceso a las funciones desarrolladas en los controladores mediante el archivo `routes/api.php`(Hay más información sobre el desarrollo de rutas [en este documento][l4])
 
-## Siguiente: [Configuración de Sanctum][l5]
+## Siguiente: [Configuración de Sanctum][siguiente]
 
+[siguiente]:ConfiguracionDeSanctum.md
 [l1]:https://laravel.com/docs/12.x/installation
 [l2]:../app/Models/User.php
 [l3]:BasesDeDatosEnLaravel.md
 [l4]:RutasDeLaravel.md
-[l5]:ConfiguracionDeSanctum.md
+[l5]:https://code.visualstudio.com/
 [l6]:../back_notas_2/
 [l7]:https://github.com/kurotori/Frontend/tree/main/EjemplosBase/notas-base
 [l8]:https://github.com/alexeymezenin/laravel-best-practices/blob/master/spanish.md#sigue-la-convenci%C3%B3n-de-laravel-para-los-nombres
 [l9]:https://docs.google.com/document/d/e/2PACX-1vQeM-NoqZRWMX-9AZqMNgVnXInmweh8gW9d6Xi-SrguWBC9MrpVztjvAvDOT3LdwImd7QYJMxvzQGwG/pub
+[l10]:https://netbeans.apache.org/front/main/index.html
+[l11]:https://www.sublimetext.com/

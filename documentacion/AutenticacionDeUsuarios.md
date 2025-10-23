@@ -193,6 +193,8 @@ El proceso de cierre de sesión es el siguiente:
 
 Para acceder a estas funcionalidades, estableceremos las rutas correspondientes en el archivo `routes/api.php`([ver en el archivo][l5]).
 
+> **Nota:** Para acceder al archivo `routes/api.php`, debemos instalar las funcionalidades de api en nuestro proyecto de Laravel, tal y como se describe en ["Configuración del Proyecto"][l6].
+
 Esto puede lograrse de diferentes maneras:
 
 ### Mediante rutas individuales
@@ -201,31 +203,42 @@ Simplemente definimos cada una de las rutas que necesitamos, estableciendo, adem
 
 En el caso de funcionalidades de autenticación de usuarios, utilizaremos como guardia los _middlewares_ `web`, para el inicio de sesión, y `auth:sanctum` para el cierre de sesión.
 
+Para proteger nuestras rutas, _indicaremos con qué guardia la asociaremos_, de acuerdo al siguiente patrón:
+
+```php
+    Route::post(
+        'uri/de/la/ruta',
+        [Controlador::class, 'nombreDeLaFunción']
+    )->middleware('guardia');
+```
+
+O, alternativamente:
+
+```php
+    Route::middleware('guardia')->post(
+        'uri/de/la/ruta',
+        [Controlador::class, 'nombreDeLaFunción']
+    );
+```
+
+> **Nota:** Se recomienda leer el [capítulo sobre el manejo de rutas en esta documentación][l7] para profundizar en esta sintaxis.
+
 1. #### Acceso a inicio de sesión
 
     Para autenticar una sesión, el proceso debe realizarse mediante el método `post`, ya que las credenciales del usuario son **datos sensibles** que deben viajar protegidos en la conexión.
 
-    Crearemos nuestras rutas de acuerdo al siguiente patrón:
+    ```php
+        Route::post();
+    ```
+
+    Luego, establecemos la _URI_, o "dirección" a la cual debe apuntar el frontend para obtener la autenticación del usuario.
 
     ```php
         Route::post(
-            'uri/de/la/ruta',
-            [Controlador::class, 'nombreDeLaFunción']
-        )->middleware('guardia');
-    ```
-
-    O, alternativamente:
-
-    ```php
-        Route::middleware('guardia')->post(
-            'uri/de/la/ruta',
-            [Controlador::class, 'nombreDeLaFunción']
+            'autenticar'
         );
     ```
-
-    > **Nota:** se denomina **URI**, o _Identificador Úniforme de Recurso_, a una _URL_ que permite acceder a un recurso o funcionalidad provistos por una aplicación web. Para más detalles, se recomienda leer [este artículo de MDN al respecto][l6].
-
-
+    > **Nota:** Recordar que al estar trabajando en el archivo
 
 [inicio]: #autenticación-de-usuarios-en-laravel
 [l1]: ../back_notas_2/app/Http/Controllers/Auth/
@@ -233,4 +246,5 @@ En el caso de funcionalidades de autenticación de usuarios, utilizaremos como g
 [l3]: https://owasp.org/www-community/attacks/Session_fixation
 [l4]: https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status/401
 [l5]: ../back_notas_2/routes/api.php
-[l6]: https://developer.mozilla.org/en-US/docs/Web/URI
+[l6]: ConfiguracionDelProyecto.md
+[l7]: RutasDeLaravel.md
