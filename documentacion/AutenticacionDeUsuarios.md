@@ -221,7 +221,7 @@ O, alternativamente:
     );
 ```
 
-> **Nota:** Se recomienda leer el [capítulo sobre el manejo de rutas en esta documentación][l7] para profundizar en esta sintaxis.
+> **Nota:** Se recomienda leer el [capítulo sobre el manejo de rutas][l7] para profundizar en los detalles esta sintaxis.
 
 1. #### Acceso a inicio de sesión
 
