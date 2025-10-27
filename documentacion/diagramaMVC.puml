@@ -1,13 +1,35 @@
 @startuml DiagramaMVC
+skinparam actorStyle awesome
+skinparam sequenceMessageAlign direction
 <style>
     root {
         FontColor #?black:white
     }
 </style>
 
-title Patrón Modelo, Vista, Controlador
+title Patrón MVC: Modelo, Vista, Controlador
 
-database OrigenDeDatos
-participant modelo
+database origendatos as "Origen de los Datos" #IndianRed 
+participant modelo as "Modelo" #Red
+participant controlador as "Controlador" #Green
+participant vista as "Vista" #Blue
+actor usuario as "Usuario" #Orange
 
+note left of origendatos
+Puede ser una 
+base de datos, 
+un archivo, etc
+end note
+
+origendatos <[#Green]- origendatos: El origen **Almacena y Organiza**\nlos datos de la aplicación
+
+modelo <[#Blue]- origendatos: El modelo **Solicita y Obtiene**\ndatos del origen
+modelo -[#Red]> origendatos: El modelo **Ingresa o Modifica**\ndatos en el origen
+modelo -[#Green]> modelo: El modelo **Procesa y Organiza**\nlos datos obtenidos en conjuntos\n de **objetos** manejables
+
+modelo -[#Blue]> controlador: \n
+modelo -[#Blue]> vista: El modelo **Envía** conjuntos de\nobjetos, formados con los datos\ndel origen, al controlador o a la vista
+controlador -[#Red]> modelo: \nEl controlador **Solicita** datos\no acciones sobre los datos,\nmediante el modelo
+controlador-[#Blue]> vista: \nEl controlador **Expone rutas de acceso**\na diferentes funcionalidades para su uso en la vista
+vista <[#Green]- vista: \nLa vista **Interpreta los objetos** entregados\npor el modelo para su visualización
 @enduml
