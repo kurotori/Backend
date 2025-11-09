@@ -23,13 +23,18 @@ end note
 
 origendatos <[#Green]- origendatos: El origen **Almacena y Organiza**\nlos datos de la aplicación
 
+vista -[#Blue]> usuario: La vista **expone una interfáz**\ncon la que el **usuario** puede **interactuar**
+
 modelo <[#Blue]- origendatos: El modelo **Solicita y Obtiene**\ndatos del origen
 modelo -[#Red]> origendatos: El modelo **Ingresa o Modifica**\ndatos en el origen
+vista <[#Red]- usuario: El **usuario ingresa datos y\nejecuta funcionalidades** disponibles\nmediante la interfáz creada por la **vista**.
 modelo -[#Green]> modelo: El modelo **Procesa y Organiza**\nlos datos obtenidos en conjuntos\n de **objetos** manejables
 
 modelo -[#Blue]> controlador: \n
 modelo -[#Blue]> vista: El modelo **Envía** conjuntos de\nobjetos, formados con los datos\ndel origen, al controlador o a la vista
+
 controlador -[#Red]> modelo: \nEl controlador **Solicita** datos\no acciones sobre los datos,\nmediante el modelo
 controlador-[#Blue]> vista: \nEl controlador **Expone rutas de acceso**\na diferentes funcionalidades para su uso en la vista
-vista <[#Green]- vista: \nLa vista **Interpreta los objetos** entregados\npor el modelo para su visualización
+vista <[#Green]- vista: \nLa vista **Interpreta los objetos** entregados\npor el modelo y permite su **visualización**
+controlador<[#Red]- vista: La vista envía **solicitudes** al **controlador**
 @enduml
